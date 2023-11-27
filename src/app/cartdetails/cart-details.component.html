@@ -1,0 +1,32 @@
+<div class="cart-details-container">
+    <h2>Cart Details</h2>
+    <div *ngIf="cartData.productList && cartData.productList.length > 0; else emptyCart">
+      <ul class="cart-list">
+        <li *ngFor="let product of cartData.productList" class="cart-item">
+          <div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+          </div>
+          <div class="item-details">
+            <p>MRP: ₹{{ product.mrp }}</p>
+            <p>Discount: {{ product.discountPercentage }}%</p>
+            <p>Tax: {{ product.tax }}%</p>
+            <p>Quantity: {{ product.quantity }}</p>
+            <button (click)="removeProduct(product.id)">Remove from Cart</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+    </ng-template>
+  
+    <div class="total-info">
+      <p>Total MRP: ₹{{ cartData.totalMRP }}</p>
+      <p>Total Discount: {{ cartData.totalDiscountPercentage }}%</p>
+      <p>Total Tax: {{ cartData.totalTax }}%</p>
+      <p>Total Cost: ₹{{ cartData.totalCost }}</p>
+      
+    </div>
+  </div>
+  

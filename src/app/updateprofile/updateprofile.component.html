@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="user-profile-form">
+        <h2>Update Profile</h2>
+        <form #usersData="ngForm" (ngSubmit)="updateProfile(1,usersData.value)">
+            <label for="id1">ID:{{userid}}</label>
+            <label for="name">Name:</label>
+            <input type="text" ngModel id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="mobileNo">Mobile Number:</label>
+            <input type="text" ngModel id="mobileNo" name="mobileNo" placeholder="Enter your mobile number" required>
+
+            <label for="email">Email:</label>
+            <input type="email" ngModel id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" ngModel name="address" placeholder="Enter your address" required></textarea>
+
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+</body>
+</html>

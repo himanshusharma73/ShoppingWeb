@@ -1,0 +1,56 @@
+/* yourprofile.component.scss */
+
+.profile-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .profile-details {
+    margin-top: 20px;
+  }
+  
+  .profile-details p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .profile-details strong {
+    color: #3498db;
+  }
+  
+  /* Add hover effect for a subtle interaction */
+  .profile-container:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Media query for responsive design (adjust as needed) */
+  @media screen and (max-width: 768px) {
+    .profile-container {
+      padding: 15px;
+    }
+  }
+  .delete-profile-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .delete-profile-button:hover {
+    background-color: #c0392b;
+  }  

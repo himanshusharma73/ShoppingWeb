@@ -1,0 +1,26 @@
+<!-- productdetails.component.html -->
+
+<div *ngIf="products.length > 0; else noProducts">
+  <h2>Product List</h2>
+  <ul class="product">
+    <li *ngFor="let product of products" class="product-item">
+      <h3>{{ product.name }}</h3>
+      <p class="product-description">{{ product.description }}</p>
+      <p class="product-price">MRP: ₹{{ product.mrp }}</p>
+      <p class="product-discount">Discount: {{ product.discountPercentage }}%</p>
+      <p class="product-tax">Tax: ₹{{ product.tax }}</p>
+      <p class="product-mfg-date">Manufacture Date: {{ product.mfgDate | date }}</p>
+      <p class="product-exp-date">Expiry Date: {{ product.expDate | date }}</p>
+      <p class="product-quantity">Quantity Available: {{ product.quantity }}</p>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" [(ngModel)]="product.selectedQuantity" min="1" max="{{ product.quantity }}" />
+      <br>
+      <button class="add-to-cart-button" (click)="addToCart(product)">Add to Cart</button>
+      <hr />
+    </li>
+  </ul>
+</div>
+
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>
