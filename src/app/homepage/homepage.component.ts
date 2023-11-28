@@ -9,15 +9,26 @@ import { UsersService } from '../services/users.service';
 export class HomepageComponent {
   user: any;
   isMenuOpen = false;
+  itemCount = 0; 
   constructor(private userService: UsersService) {}
 
   ngOnInit() {
-    // Retrieve user information from your service (replace with actual API call)
-    this.userService.getUserInfo().subscribe((users: any) => {
-      this.user = users;
-    });
+  this.userDetails();
+    
 }
-
+userDetails(){
+  this.userService.getUserInfo().subscribe((users: any) => {
+    this.user = users;
+    this.cartDetails();
+  });
+}
+cartDetails() {
+  this.userService.getCart(this.user.id).subscribe(
+    (response: any) => {
+        this.itemCount = response.data.productLists.length;   
+    }
+  );
+}
 
   toggleMenu() {
     console.log("working");

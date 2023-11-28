@@ -27,7 +27,12 @@
           <span class="material-icons-outlined"> favorite_border </span>
         </li>
         <li>
-          <span><a class="material-icons-outlined link" routerLink="/cartdetails">shopping_cart  </a>  </span>
+          <div class="cart-icon-container">
+            <a class="material-icons-outlined link" routerLink="/cartdetails">
+              shopping_cart
+            </a>
+            <span class="cart-item-count">{{ itemCount }}</span>
+          </div>
         </li>
         <li>
           <img src="assets/icon/user.png" class="profile" />

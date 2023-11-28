@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { Product } from '../products-details/productdetails.model';
 
 @Injectable({
@@ -66,8 +66,9 @@ getProducts(): Observable<Product[]> {
   );
 }
 
-addToCart(userId: number, productId: number) {
-  return this.http.post(`http://localhost:8081/addtocart/${userId}/product/${productId}`,{});
+addToCart(userId: number, productId: number,quantity:number) {
+  console.log('data',quantity);
+  return this.http.post(`http://localhost:8081/addtocart/${userId}/product/${productId}`,{quantity});
 }
 
 getCart(userId:number): Observable<any> {
@@ -86,5 +87,6 @@ isProductInCart(userId: number, productId: number): Observable<boolean> {
 removeFromCart(userId: number, productId: number){
   return this.http.delete(`http://localhost:8081/users/${userId}/cart/product/${productId}`);
 }
+
 }
 

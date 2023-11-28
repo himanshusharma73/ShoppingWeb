@@ -166,3 +166,25 @@ label {
   text-align: center;
 }
 
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-item-count {
+  position: absolute;
+  top: -50%;
+  right: 50%;
+  transform: translate(50%, -0%);
+  color:black;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+
+// .cart-icon-container:hover .cart-item-count {
+//   /* Apply a similar hover effect to the item count */
+//   transform: scale(1.08) translateY(-1px);
+//   color: #ff9800;
+// }

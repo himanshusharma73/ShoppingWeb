@@ -17,16 +17,23 @@ export class CartDetailsComponent {
     this.cartDetails();
   }
 
-  cartDetails(){
+  cartDetails() {
     this.cartService.getUserInfo().subscribe(
-      (userInfo: { id: number; }) => {
+      (userInfo: { id: number }) => {
         this.userId = userInfo.id;
+        this.cartService.getCart(this.userId).subscribe(
+          (data: any) => {
+            this.cartData = data.data;
+          },
+          (error) => {
+            console.error('Error fetching cart data', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching user information', error);
       }
     );
-  
-    this.cartService.getCart(this.userId).subscribe((data: any) => {
-      this.cartData = data.data;
-    });
   }
 
   removeProduct(productId: number) {
