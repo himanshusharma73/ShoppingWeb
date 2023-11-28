@@ -13,7 +13,7 @@ export class ProductsDetailsComponent {
   products: Product[] = [];
   userId: number = 0;
   constructor(private userData:UsersService,private homepageComponent: HomepageComponent) { }
-
+  
   
 
   ngOnInit() {
