@@ -43,8 +43,9 @@ cartDetails() {
   toggleMenu1(){
     this.isCartOpen=true;
     this.isProductOpen=false
-  }
+  }  
 
+  
   setActiveComponent(component: string): void {
     this.activeComponent = component;
   }

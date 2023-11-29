@@ -21,14 +21,14 @@
     <nav>
       <ul >
         <li [class.active]="activeComponent === 'notifications'" (click)="setActiveComponent('notifications')">  
-          <span class="material-icons-outlined" (click)="toggleMenu"> home </span>
+          <span class="material-icons-outlined"> home </span>
         </li>
         <li  [class.active]="activeComponent === 'favorite'" (click)="setActiveComponent('favorite')">
           <span class="material-icons-outlined"> favorite_border </span>
         </li>
         <li  [class.active]="activeComponent === 'shopping_cart'" (click)="setActiveComponent('shopping_cart')">
           <div class="cart-icon-container">
-            <span class="material-icons-outlined link" (click)="toggleMenu1()">shopping_cart</span>
+            <span class="material-icons-outlined link" >shopping_cart</span>
             <span class="cart-item-count">{{ itemCount }}</span>
           </div>
         </li>
@@ -64,8 +64,10 @@
     </nav>
     
   </body>
-  <div class="product-details-container">
-    <app-products-details *ngIf="isProductOpen"></app-products-details>
-  </div>
-  <app-cart-details *ngIf="isCartOpen"></app-cart-details>
+  <div class="product-details-container" *ngIf="activeComponent === 'notifications'">
+    <app-products-details></app-products-details>
+  </div >
+  <div *ngIf="activeComponent === 'shopping_cart'"> 
+  <app-cart-details ></app-cart-details>
+</div>
 </html>
