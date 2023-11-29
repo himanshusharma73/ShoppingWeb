@@ -182,6 +182,22 @@ label {
   font-size: 12px;
 }
 
+nav ul li {
+  position: relative;
+  cursor: pointer;
+}
+
+nav ul li.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px; /* Adjust the width of the line */
+  height: 2px; /* Adjust the height/thickness of the line */
+  background-color: #333; /* Adjust the color of the line */
+  display: block;
+}
 
 // .cart-icon-container:hover .cart-item-count {
 //   /* Apply a similar hover effect to the item count */

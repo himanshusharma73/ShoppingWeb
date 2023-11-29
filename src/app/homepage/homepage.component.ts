@@ -8,13 +8,17 @@ import { UsersService } from '../services/users.service';
 })
 export class HomepageComponent {
   user: any;
-  isMenuOpen = false;
+  isProductOpen =true;
   itemCount = 0; 
+  isCartOpen=false;
+  activeComponent: string = 'notifications';
+
   constructor(private userService: UsersService) {}
 
   ngOnInit() {
   this.userDetails();
-    
+  
+  
 }
 userDetails(){
   this.userService.getUserInfo().subscribe((users: any) => {
@@ -31,8 +35,18 @@ cartDetails() {
 }
 
   toggleMenu() {
-    console.log("working");
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isProductOpen =true;
+    this.isCartOpen=false;
+    console.log(this.isProductOpen)
+  }
+
+  toggleMenu1(){
+    this.isCartOpen=true;
+    this.isProductOpen=false
+  }
+
+  setActiveComponent(component: string): void {
+    this.activeComponent = component;
   }
 }
 
