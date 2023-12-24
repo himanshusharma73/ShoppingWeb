@@ -28,17 +28,10 @@ export class UsersService {
   }
 
   getUserInfo(): Observable<any> {
-    // Check if userInfo is already fetched
-
-      // If userInfo is available, return it as an observable
       return new Observable(observer => {
         observer.next(this.userInfo);
         observer.complete();
       });
-    // } else {
-    //   // If userInfo is not available, fetch it from the server
-    //  // return this.http.get('http://localhost:8081/users');
-    // }
 }
 
 addusers(data:any){

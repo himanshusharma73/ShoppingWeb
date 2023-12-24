@@ -20,8 +20,6 @@ export class YourprofileComponent {
         () => {
           // Deletion successful
           alert('User deletion successful');
-          
-          // Navigate to the login component
           this.router.navigate(['/login']);
         },
         (error) => {
