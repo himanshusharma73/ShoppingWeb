@@ -1,13 +1,14 @@
 <div class="container">
     <h2>Login or Sign Up</h2>
-    <form  #loginForm="ngForm" (ngSubmit)="login(loginForm.value.id,loginForm.value.password)">
+    <form  #loginForm="ngForm" (ngSubmit)="login()">
       <div class="form-group">
-        <label for="id">User ID</label>
-        <input type="number" ngModel name="id" placeholder="Enter User ID" required>
+        <label for="
+        ">User Email</label>
+        <input type="email" [(ngModel)]="loginDto.email" name="email" placeholder="Enter User Email" required>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" ngModel name="password" placeholder="Enter Password" required>
+        <input type="password" [(ngModel)]="loginDto.password" name="password" placeholder="Enter Password" required>
       </div>
       <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
     </form>

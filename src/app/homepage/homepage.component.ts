@@ -29,7 +29,11 @@ userDetails(){
 cartDetails() {
   this.userService.getCart(this.user.id).subscribe(
     (response: any) => {
-        this.itemCount = response.data.productLists.length;   
+      this.itemCount = response?.data?.productLists?.length ?? 0;
+    },
+    (error) => {
+      console.error('Error fetching cart details:', error);
+      this.itemCount = 0;
     }
   );
 }
@@ -44,7 +48,6 @@ cartDetails() {
     this.isCartOpen=true;
     this.isProductOpen=false
   }  
-
   
   setActiveComponent(component: string): void {
     this.activeComponent = component;

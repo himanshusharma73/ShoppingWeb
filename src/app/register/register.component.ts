@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { AuthService} from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  constructor(private userService:UsersService,private router: Router){}
-  addUser(data:any){
-    this.userService.addusers(data).subscribe((result)=>{console.log(result)});
-    alert('User added successfully');
-    this.router.navigate(['/homepage']);
-  }
 
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  addUser(data :any): void {
+    this.authService.register(data).subscribe(
+      result => {
+        console.log('User registered successfully', result);
+        alert('User registered successfully');
+        this.router.navigate(['/homepage']);
+      },
+      error => {
+        this.errorMessage = error.error.message;
+        console.error('Error registering user', error);
+      }
+    );
+  }
 }

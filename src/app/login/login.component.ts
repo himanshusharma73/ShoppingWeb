@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NgForm} from '@angular/forms'
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import {AuthService} from '../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -9,30 +10,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  id: number=0;
-  password: string = '';
 
-  constructor(private users: UsersService, private router: Router) {}
+  loginDto = {
+    email: '',
+    password: '',
+  };
 
-  login(id:number,password:string) {
-    this.id=id;
-    this.password=password;
-    // Call the authenticate method with user input
-    this.users.authenticate(this.id, this.password).subscribe(
-      (user) => {
-        
-        // Authentication successful, you can handle it here
-       // console.log('Authentication successful');
-       this.router.navigate(['/homepage']);
+  constructor(private authService : AuthService, private router: Router) {}
+
+  login(){
+    this.authService.login(this.loginDto).subscribe(
+      (response) => {
+        localStorage.setItem('authToken', response.data.user.token);
+        this.router.navigate(['/homepage']);
       },
       (error) => {
         console.error('Authentication failed', error);
-
-      // You might want to show a user-friendly error message here
-      alert('Authentication failed. Please check your ID and password.');
+      alert('Authentication failed. Please check your email and password.');
       }
     );
-}
+  }
+  
 }
 
 

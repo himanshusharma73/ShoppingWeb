@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { Product } from '../products-details/productdetails.model';
+import {AuthService} from '../services/auth.service'
 
 @Injectable({
   providedIn: 'root'
@@ -12,32 +13,13 @@ export class UsersService {
 
   private userInfo:any;
   
-  constructor(private http: HttpClient) {}
-
-  authenticate(id: number, password: string) {
-    // Define the authentication request body
-    const authData = {
-      id: id,
-      password: password,
-    };
-
-    return this.http.post('http://localhost:8081/users/pass', authData).pipe
-    (tap((user)=>{
-      this.userInfo=user;
-    }));
-  }
+  constructor(private http: HttpClient,private authService: AuthService ) {}
 
   getUserInfo(): Observable<any> {
-      return new Observable(observer => {
-        observer.next(this.userInfo);
-        observer.complete();
-      });
-}
-
-addusers(data:any){
-  return this.http.post('http://localhost:8081/users',data);
-}
-
+    const userInfo = this.authService.getUserInfo();
+    this.userInfo = userInfo;
+    return of(userInfo);
+  }
 
 updateProfile(id:number,data:any): Observable<any> {
   return this.http.put(`http://localhost:8081/users/${id}`, data)
@@ -49,8 +31,25 @@ updateProfile(id:number,data:any): Observable<any> {
     );
 }
 
+// getProducts(): Observable<Product[]> {
+//   return this.http.get<any>('http://localhost:8081/products').pipe(
+//     map((response: any) => response.data?.productList || []),
+//     catchError((error: any) => {
+//       console.error('Error fetching products', error);
+//       return throwError('An error occurred while fetching products.');
+//     })
+//   );
+// }
+
 getProducts(): Observable<Product[]> {
-  return this.http.get<any>('http://localhost:8081/products').pipe(
+
+   const token = this.authService.getToken();
+    
+   const headers = new HttpHeaders({
+     'Authorization': `Bearer ${token}`
+   });
+  console.log(token);
+  return this.http.get<any>('http://localhost:8081/products', { headers }).pipe(
     map((response: any) => response.data?.productList || []),
     catchError((error: any) => {
       console.error('Error fetching products', error);
@@ -58,6 +57,7 @@ getProducts(): Observable<Product[]> {
     })
   );
 }
+
 
 addToCart(userId: number, productId: number,quantity:number) {
   console.log('data',quantity);
